@@ -71,19 +71,7 @@ The website is optimized for:
 
 This project was created to practice responsive web design, Tailwind CSS, and modern UI development.
 
-## 📸 Screenshots
 
-### Home Page
-
-![Home Page](./screenshots/home.png)
-
-### Services Section
-
-![Services](./screenshots/services.png)
-
-### Footer
-
-![Footer](./screenshots/footer.png)
 ## 👩‍💻 Author
 
 **Negar Valimohammadi**
