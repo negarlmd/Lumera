@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+}
+@layer utilities {
+  .row {
+    @apply w-full flex flex-wrap;
+  }
+}
+@layer components {
+  
+  .card {
+    @apply  absolute  top-20 left-10 lg:top-20 lg:left-10 ;
+
+  }
+   .click{
+      @apply text-white  py-4 px-8 font-sans uppercase border bg-[#a6823f]  rounded-4xl w-[90%] h-[20%] lg:block  md:hidden cursor-pointer hover:scale-105
+   }
+   .icon{
+    @apply w-[50px] h-[50px] bg-white border rounded-4xl flex items-center mb-4 font-medium
+   }
+  .cardFoot{
+    @apply  w-[400px] absolute top-20  items-center text-center mx-[40px]  
+  }
+ .listInfooter{
+  @apply   w-full  md:w-1/2 lg:w-1/5 *:nth-[1]:font-sans  *:nth-[2]:*:my-3
+ }
+ 
+}

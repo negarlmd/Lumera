@@ -1,0 +1,102 @@
+/*!
+ * Lumera — Spa & Beauty
+ * main.js — vanilla JS for header, slider, drawer, animations
+ */
+(function(){
+  'use strict';
+
+  // ---- Sticky header ----
+  var header = document.querySelector('.lum-header');
+  if (header) {
+    window.addEventListener('scroll', function(){
+      if (window.scrollY > 60) header.classList.add('is-scrolled');
+      else header.classList.remove('is-scrolled');
+    });
+  }
+
+  // ---- Mobile drawer ----
+  var burger = document.querySelector('.lum-burger');
+  var drawer = document.querySelector('.lum-mobile-drawer');
+  var overlay = document.querySelector('.lum-drawer-overlay');
+  var drawerClose = document.querySelector('.lum-drawer-close');
+  function openDrawer(){ drawer && drawer.classList.add('is-open'); overlay && overlay.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+  function closeDrawer(){ drawer && drawer.classList.remove('is-open'); overlay && overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+  burger && burger.addEventListener('click', openDrawer);
+  drawerClose && drawerClose.addEventListener('click', closeDrawer);
+  overlay && overlay.addEventListener('click', closeDrawer);
+
+  // Mobile sub-toggles
+  document.querySelectorAll('.lum-mobile-nav .sub-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var sub = btn.parentElement.querySelector('.lum-submenu-mobile');
+      if (sub) sub.classList.toggle('is-open');
+    });
+  });
+
+  // ---- Hero slider ----
+  var slider = document.querySelector('.lum-slider');
+  if (slider) {
+    var slides = slider.querySelectorAll('.lum-slide');
+    var dots = slider.querySelectorAll('.lum-slider-nav button');
+    var prev = slider.querySelector('.lum-slider-arrow.prev');
+    var next = slider.querySelector('.lum-slider-arrow.next');
+    var idx = 0, timer;
+
+    function show(i){
+      idx = (i + slides.length) % slides.length;
+      slides.forEach(function(s,n){ s.classList.toggle('is-active', n===idx); });
+      dots.forEach(function(d,n){ d.classList.toggle('is-active', n===idx); });
+    }
+    function autoplay(){ clearInterval(timer); timer = setInterval(function(){ show(idx+1); }, 6000); }
+    dots.forEach(function(d,i){ d.addEventListener('click', function(){ show(i); autoplay(); }); });
+    prev && prev.addEventListener('click', function(){ show(idx-1); autoplay(); });
+    next && next.addEventListener('click', function(){ show(idx+1); autoplay(); });
+    show(0); autoplay();
+  }
+
+  // ---- Scroll up button ----
+  var scrollUp = document.querySelector('.scroll-up');
+  if (scrollUp) {
+    window.addEventListener('scroll', function(){
+      if (window.scrollY > 400) scrollUp.classList.add('is-visible');
+      else scrollUp.classList.remove('is-visible');
+    });
+    scrollUp.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+  }
+
+  // ---- Reveal on scroll ----
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // ---- Counter animation ----
+  document.querySelectorAll('.stat-item .num').forEach(function(el){
+    var target = parseInt(el.dataset.count || el.textContent, 10) || 0;
+    var suffix = el.dataset.suffix || '';
+    el.textContent = '0' + suffix;
+    if (!('IntersectionObserver' in window)) { el.textContent = target + suffix; return; }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          var n = 0, step = Math.max(1, Math.ceil(target/40));
+          var t = setInterval(function(){
+            n += step;
+            if (n >= target) { n = target; clearInterval(t); }
+            el.textContent = n + suffix;
+          }, 30);
+          obs.unobserve(el);
+        }
+      });
+    });
+    obs.observe(el);
+  });
+
+})();
