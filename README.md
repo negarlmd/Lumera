@@ -25,24 +25,19 @@ Lumera is a modern spa and wellness landing page designed to provide a relaxing 
 - Responsive Design
 
 ## 📂 Project Structure
-
-```
+```text
 Lumera/
 │
 ├── index.html
 ├── stylesheet/
 │   └── output.css
-│
 ├── images/
-│   ├── hero-spa-3.jpg
-│   ├── hero-spa-2.jpg
-│   ├── about-1.jpg
-│   ├── about-2.jpg
-│   └── ...
-│
+├── screenshots/
+│   ├── home.png
+│   ├── services.png
+│   └── footer.png
 └── README.md
 ```
-
 ## 🎨 Design Highlights
 
 - Warm spa-inspired color palette
@@ -70,7 +65,25 @@ The website is optimized for:
 
 ## 🔗 Live Demo
 
-https://your-demo-link.com
+👉 https://negarlmd.github.io/Lumera/
+
+## 🎯 Purpose
+
+This project was created to practice responsive web design, Tailwind CSS, and modern UI development.
+
+## 📸 Screenshots
+
+### Home Page
+
+![Home Page](./screenshots/home.png)
+
+### Services Section
+
+![Services](./screenshots/services.png)
+
+### Footer
+
+![Footer](./screenshots/footer.png)
 ## 👩‍💻 Author
 
 **Negar Valimohammadi**
